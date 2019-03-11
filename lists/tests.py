@@ -23,6 +23,15 @@ class HomePageTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], '/')
 
+    def test_displays_all_list_items(self):
+        Item.objects.create(text='itemey 1')
+        Item.objects.create(text='itemey 2')
+
+        response = self.client.get('/')
+
+        self.assertIn('itemey 1', response.content.decode())
+        self.assertIn('itemey 2', response.content.decode())
+
 
 class ItemModelTest(TestCase):
 
@@ -42,17 +51,3 @@ class ItemModelTest(TestCase):
         second_saved_item = saved_items[1]
         self.assertEqual(first_saved_item.text, 'The first (ever) list item')
         self.assertEqual(second_saved_item.text, 'Item the second')
-
-        def test_displays_all_list_items(self):
-            Item.objects.create(text='itemey 1')
-            Item.objects.create(text='itemey 2')
-            response = self.client.get('/')
-
-            self.assertIn('itemey 1', response.content.decode())
-            self.assertIn('itemey 2', response.content.decode())
-
-            response = self.client.get('/')
-
-            self.assertIn('itemey 1', response.content.decode())
-            self.assertIn('itemey 2', response.content.decode())
-
