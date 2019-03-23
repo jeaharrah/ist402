@@ -2,6 +2,8 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+
 import time
 
 MAX_WAIT = 10
@@ -10,7 +12,9 @@ MAX_WAIT = 10
 class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        binary = FirefoxBinary('C:\\Program Files\\Mozilla Firefox\\firefox.exe')
+        gecko_driver = 'virtualenv\\Scripts\\geckodriver.exe'
+        self.browser = webdriver.Firefox(firefox_binary=binary, executable_path=gecko_driver)
 
     def tearDown(self):
         self.browser.quit()
