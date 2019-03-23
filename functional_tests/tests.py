@@ -11,6 +11,7 @@ MAX_WAIT = 10
 
 class NewVisitorTest(LiveServerTestCase):
 
+    # Set up the server
     def setUp(self):
         binary = FirefoxBinary('C:\\Program Files\\Mozilla Firefox\\firefox.exe')
         gecko_driver = 'virtualenv\\Scripts\\geckodriver.exe'
