@@ -9,6 +9,7 @@ import time
 MAX_WAIT = 5
 
 
+# Now uses LiveServerTestCase
 class NewVisitorTest(LiveServerTestCase):
 
     # Set up the server
