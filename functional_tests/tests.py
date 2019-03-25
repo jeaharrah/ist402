@@ -74,7 +74,6 @@ class NewVisitorTest(LiveServerTestCase):
         # Edith wonders whether the site will remember her list. Then she sees
         # that the site has generated a unique URL for her -- there is some
         # explanatory text to that effect.
-        self.fail('Finish the test!')
 
         # She visits that URL - her to-do list is still there.
 
@@ -97,7 +96,10 @@ class NewVisitorTest(LiveServerTestCase):
         ## We use  new browser session to make sure that no information
         ## of Edith's is coming through from cookies, etc.
         self.browser.quit()
-        self.browser = webdriver.Firefox()
+
+        binary = FirefoxBinary('C:\\Program Files\\Mozilla Firefox\\firefox.exe')
+        gecko_driver = 'virtualenv\\Scripts\\geckodriver.exe'
+        self.browser = webdriver.Firefox(firefox_binary=binary, executable_path=gecko_driver)
 
         # Francis visits the home page. There is no sign of Edith's list
         self.browser.get(self.live_server_url)
